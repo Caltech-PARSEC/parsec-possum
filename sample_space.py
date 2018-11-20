@@ -3,6 +3,8 @@ Code to get a hyperopt sample space of rocket parameters, and default
 sample spaces that should cover most search cases.
 '''
 
+from hyperopt import hp
+
 
 def get_sample_space(
         # Fixed
@@ -19,8 +21,10 @@ def get_sample_space(
         ch4_tube_radius=None):
     '''
     Gets a sample space of rocket parameters, many of which are optional.
+
     Optional (None) parameters are fixed if provided a value and learned
-    otherwise.
+    otherwise. Instead of any learnable value, an equivalent hyperopt
+    parameter expression is acceptable.
 
     Arguments (fixed)
     -----------------
@@ -92,7 +96,30 @@ def get_sample_space(
         A list of arguments in order of above, either numeric or as hyperopt
         parameter expressions.
     '''
-    raise(NotImplementedError)  # TODO
+    return [
+        dry_mass,
+        thrust_margin,
+        radius or hp.uniform('radius', 2, 12),
+        dry_com or hp.uniform('dry_com', 0, 1),
+        nose_len or hp.uniform('nose_len', 2, 30),
+        body_len or hp.uniform('body_len', 1.5, 4),
+        boat_len or hp.uniform('boat_len', 0, 10),
+        nose_shape or 1 + hp.randint('nose_shape', 7),
+        nose_tip_di or hp.uniform('nose_tip_di', 0, 2),
+        nose_power or hp.uniform('nose_power', 0, 0.99),
+        fin_count or hp.choice('fin_count', [3, 4]),
+        fin_root_chord or hp.uniform('fin_root_chord', 0, 1),
+        fin_span or hp.uniform('fin_span', 0, 1),
+        fin_tip_chord or hp.uniform('fin_tip_chord', 0, 1),
+        fin_sweep or hp.uniform('fin_sweep', 0, 1),
+        fin_thickness or hp.quniform('fin_thickness', 1, 10, 1),
+        fin_base_sep or hp.uniform('fin_base_sep', 0, 1),
+        fin_shape or 1 + hp.randint('fin_shape', 9),
+        fin_le_rad or hp.uniform('fin_le_rad', 0.1, 1),
+        fin_le_len or hp.uniform('fin_le_len', 0.1, 3),
+        fin_te_len or hp.uniform('fin_te_len', 0.1, 3),
+        ch4_tube_radius or hp.quniform('ch4_tube_radius', 1, 16, 1)
+    ]
 
 
 def parse_args(args):
