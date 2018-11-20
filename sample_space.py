@@ -167,6 +167,6 @@ def _scale(in_, min_, max_):
     float : [min_, max_]
         The proportional value scaled into the output range.
     '''
-    assert(0 < in_ < 1)
-    assert(min_ < max_)
+    assert(0 <= in_ <= 1)
+    assert(min_ <= max_)
     return in_ * (max_ - min_) + min_
