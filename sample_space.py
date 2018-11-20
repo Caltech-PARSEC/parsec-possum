@@ -124,7 +124,7 @@ def parse_args(args):
         'dry_mass': args[0],
         'thrust_margin': args[1],
         'radius': radius,
-        'dry_com': _scale(args[3],
+        'dry_CoM': _scale(args[3],
                           nose_len + body_len - (tank_and_engine_len / 2),
                           nose_len + body_len - (tank_and_engine_len / 3)),
         'nose_len': nose_len,
@@ -145,7 +145,7 @@ def parse_args(args):
         'fin_le_rad': args[18] if fin_shape in [1, 3, 4, 5, 6, 7] else None,
         'fin_le_len': args[19] if fin_shape in [1, 3, 6] else None,
         'fin_te_len': args[20] if fin_shape == 1 else None,
-        'ch4_tube_radius': args[21] / 8
+        'CH4_tube_radius': args[21] / 8
     }
 
 
