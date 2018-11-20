@@ -26,6 +26,9 @@ def objective(args, args_file):
               '├─ 2: most free\n└─ 3: all free',
               default=0, help='which sample space to use')
 def run_optimization(max_trials, space):
+    assert(0 < max_trials < 100000)
+    assert(space in [0, 1, 2, 3])
+
     name_base = 'hyperopt_runs/{}_{}'.format(max_trials, space)
     logging.basicConfig(filename='{}.log'.format(name_base),
                         level=logging.DEBUG,
