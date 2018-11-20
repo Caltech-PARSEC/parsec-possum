@@ -197,3 +197,43 @@ def _scale(in_, min_, max_):
     assert(0 <= in_ <= 1)
     assert(min_ <= max_)
     return in_ * (max_ - min_) + min_
+
+
+# Default sample spaces
+space_all = get_sample_space()                 # All parameters learnable
+
+space_most = get_sample_space(fin_le_rad=0.5,  # "Unimportant" parameters fixed
+                              fin_le_len=1.5,
+                              fin_te_len=1.5,
+                              ch4_tube_radius=8)
+
+space_few = get_sample_space(fin_le_rad=0.5,   # More parameters fixed
+                             fin_le_len=1.5,
+                             fin_te_len=1.5,
+                             ch4_tube_radius=8,
+                             nose_tip_di=0,
+                             fin_thickness=1,
+                             fin_base_sep=0,
+                             nose_power=0.1)
+
+space_body = get_sample_space(fin_le_rad=0.5,  # Fin and nose parameters fixed
+                              fin_le_len=1.5,
+                              fin_te_len=1.5,
+                              ch4_tube_radius=8,
+                              nose_len=15,
+                              nose_shape=1,
+                              nose_tip_di=0,
+                              nose_power=0,
+                              fin_count=4,
+                              fin_root_chord=1,
+                              fin_span=1,
+                              fin_tip_chord=0.75,
+                              fin_sweep=0.33,
+                              fin_thickness=1,
+                              fin_base_sep=0,
+                              fin_shape=7)
+
+
+# Debugging code
+if __name__ == '__main__':
+    from hyperopt.pyll.stochastic import sample  # NOLINT
