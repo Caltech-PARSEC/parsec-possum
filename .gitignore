@@ -1,5 +1,7 @@
 ### PROJECT ###
 *.log
+*.csv
+*.ENG
 
 ### VIM ###
 # Swap
